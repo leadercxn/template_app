@@ -13,6 +13,7 @@ LDFLAGS = -L../lib -ltest -lm -lpthread
 #LDFLAGS = -L../lib/share -ltest
 
 
+
 all: $(APP)
 
 %.o: %.c

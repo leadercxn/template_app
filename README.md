@@ -12,7 +12,7 @@
   - main.c     		//这个应用链接库使用它们的函数的实例
   - Makefile			//链接库的makefile
 - **lib（库）**
-  - share				//动态库
+  - share				  //动态库
   - libtest.a				//静态库
 - **src（源码）**
   - cJSON.c			//cjson代码
