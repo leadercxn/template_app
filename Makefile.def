@@ -1,4 +1,1 @@
-TARGET = app_select
-
-
-
+BUILD_TARGET = app_select

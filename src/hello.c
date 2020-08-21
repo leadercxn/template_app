@@ -1,7 +1,8 @@
-#include "hello.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+
+#include "hello.h"
 
 void *Test_print(void *p)
 {
@@ -24,3 +25,8 @@ int print_hello(char *string)
 	return 1;
 }
 
+int print(char *string)
+{
+	printf("%s\n",string);
+	return 0;
+}

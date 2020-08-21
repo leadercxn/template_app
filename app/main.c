@@ -1,11 +1,14 @@
-#include "hello.h"
-#include "cJSON.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int main()
+#include "hello.h"
+
+
+int main(int argc , char *argv[])
 {
+
+#if 0
 	/********库里面的测试函数*********/
 	char *s = "Hello World";
 	print_hello(s);
@@ -87,5 +90,9 @@ int main()
 	free(p);
 	free(q);
 	exit(0);
+#endif
+	print("cao");
+	printf("hello,world\r\n");
+
 }
 

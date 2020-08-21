@@ -3,5 +3,6 @@
 
 
 int print_hello(char *string);
+int print(char *string);
 
 #endif
