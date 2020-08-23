@@ -2,10 +2,10 @@ include Makefile.src
 
 MAKEFILE_NAME := $(MAKEFILE_LIST)
 MAKEFILE_DIR := $(dir $(MAKEFILE_NAME) )
-#$(info MAKEFILE_NAME is $(MAKEFILE_NAME))		#输出： ./  ./  ./
-#$(info MAKEFILE_DIR is $(MAKEFILE_DIR))		#输出： Makefile Makefile.src Makefile.def
+#$(info MAKEFILE_NAME is $(MAKEFILE_NAME))		#输出： Makefile Makefile.src Makefile.def
+#$(info MAKEFILE_DIR is $(MAKEFILE_DIR))		#输出： ./  ./  ./
 
-target ?= DEBUG
+BUILD_TYPE ?= DEBUG
 
 MK := mkdir
 RM := rm -rf
@@ -17,7 +17,7 @@ AR = ar
 remduplicates = $(strip $(if $1,$(firstword $1) $(call remduplicates,$(filter-out $(firstword $1),$1))))
 
 BUILD_DIRECTORY = build
-OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/$(target)
+OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/$(BUILD_TYPE)
 LISTING_DIRECTORY = $(OBJECT_DIRECTORY)
 OUTPUT_BINARY_DIRECTORY = $(OBJECT_DIRECTORY)
 
@@ -31,8 +31,9 @@ CFLAGS = -Werror -Wall -fPIC -Wformat=0
 #lz 是link libz 
 #-lpthread posix线程 
 LDFLAGS = -lm -lpthread
+
 #打印是否使能
-ifeq ($(target), DEBUG)
+ifeq ($(BUILD_TYPE), DEBUG)
 $(info enable trace)
 CFLAGS += -DTRACE_ENABLE
 else
@@ -41,11 +42,11 @@ CFLAGS += -DTRACE_DISABLE
 endif
 
 #default target - first one defined
-default: output
+default: all
 
-all:
-	$(MAKE) -f $(MAKEFILE_NAME) -C $(MAKEFILE_DIR) -e cleanobj
-	$(MAKE) -f $(MAKEFILE_NAME) -C $(MAKEFILE_DIR) -e output
+#all:
+#	$(MAKE) -f $(MAKEFILE_NAME) -C $(MAKEFILE_DIR) -e cleanobj
+#	$(MAKE) -f $(MAKEFILE_NAME) -C $(MAKEFILE_DIR) -e output
 
 ## Create build directories ,也会把build目录创建出来 结果 mkdir build/DEBUG
 $(BUILD_DIRECTORIES):
@@ -71,12 +72,15 @@ $(OBJECT_DIRECTORY)/%.o: %.c
 	@echo Compiling file: $(notdir $<)
 	$(CC) $(CFLAGS) $(INC_PATHS) -c -o $@ $<
 
-output: $(OBJECTS)
-	$(CC) $^ -o $@ $(LDFLAGS)
+all: $(BUILD_DIRECTORIES) $(C_OBJECTS)
+#	$(CC) $^ -o $(TARGET) $(LDFLAGS)
+	$(CC) $(C_OBJECTS) -o $(BUILD_DIRECTORIES)/$(TARGET) $(LDFLAGS)
 
+clean:
+	$(RM) $(BUILD_DIRECTORIES)
 
-
-
+cleanall:
+	$(RM) $(BUILD_DIRECTORY)
 
 
 
