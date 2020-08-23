@@ -1,4 +1,9 @@
 # Linux下的Makefile工程模板
+* 2020/8/23
+  * 新建了develop分支。
+    * 分支说明：
+      * master  Makefile的基础框架
+      * develop Makefile + Kconfig 的工程框架
 
 * 2020/8/23
   * 完成整个Makefile工程的基本搭建
