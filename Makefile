@@ -82,6 +82,8 @@ clean:
 cleanall:
 	$(RM) $(BUILD_DIRECTORY)
 
+menuconfig:
+	@$(MAKE) -f scripts/Makefile $@
 
 
 
