@@ -1,17 +1,16 @@
-### Linux下的Makefile工程模板
+# Linux下的Makefile工程模板
 
 * 2020/8/23
   * 完成整个Makefile工程的基本搭建
   * Makefile.src 用来存放工程所用到的源文件
   * Makefile.def 用来定义生成目标的名字
-
   * 操作
     * make  生成可执行文件
     * make BUILD_TYPE=DEBUG 用来生成工程buil的类型(可选:  DEBUG  , RELEASE)
   
 
 
-* before 2020/8/23 旧版本的说明
+## before   2020/8/23 旧版本的说明
 ---------
 #### 说明
 ----------
