@@ -21,6 +21,14 @@ OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/$(BUILD_TYPE)
 LISTING_DIRECTORY = $(OBJECT_DIRECTORY)
 OUTPUT_BINARY_DIRECTORY = $(OBJECT_DIRECTORY)
 
+#find libraries catalogue , if have no libraries ,it will clone libraries form my github
+LIBRARIES = libraries
+ifeq ($(LIBRARIES), $(wildcard $(LIBRARIES)))
+$(info has LIBRARIES)
+else
+$(shell git clone git@github.com:leadercxn/libraries.git)
+endif
+
 # Sorting removes duplicates
 BUILD_DIRECTORIES := $(sort $(OBJECT_DIRECTORY) $(OUTPUT_BINARY_DIRECTORY) $(LISTING_DIRECTORY) )
 
@@ -86,34 +94,3 @@ menuconfig:
 	@$(MAKE) -f scripts/Makefile $@
 
 
-
-#
-#  deprecated 弃用
-#
-
-#DIRS = src app
-#TARGETS = all clean 
-#$(TARGETS): %: $(patsubst %, %.%, $(DIRS))	#$(patsubst %, %.%, $(DIRS)) 输出: src.%  app.%
-
-#调试打印
-#
-#$(info TARGETS is $(TARGETS))
-#ALLA = all
-#TEMP =  $(patsubst %, %.$(ALLA), $(DIRS))
-#$(info TEMP is $(TEMP))
-
-
-#$(foreach TGT, $(TARGETS), $(patsubst %, %.$(TGT), $(DIRS))):
-#	$(info cao is $(patsubst %, %.$(TGT), $(DIRS)))
-#	$(MAKE) -C $(subst ., , $@)									
-
-#展开
-#	$(MAKE) -C $(subst ., , $@)		//-C表示要跳进到源代码目录下读取那里的Makefile 把$@(目标文件)中的 '.' 替换成 空格' ' 
-#	
-#	$(foreach TGT, $(TARGETS), $(patsubst %, %.$(TGT), $(DIRS))):		#目标
-#	$(MAKE) -C $(subst ., , $@)											#执行命令
-#
-#	最后展开:
-# 	make -C src all app src
-#	make -C src clean app clean
-#
